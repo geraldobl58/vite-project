@@ -56,11 +56,16 @@ export function Post({ author, content, publishedAt }: PostProps) {
 
       <div className={styles.content}>
         {content.map((line, index) => {
-          if (line.type === 'paragraph') {
-            return <p>{line.content}</p>
-          } else if (line.type === 'link') {
-            return <p><a href="#">{line.content}</a></p>
-          }
+          return (
+            <div key={index}>
+              {line.type === 'paragraph' && (
+                <p>{line.content}</p>
+              )}
+              {line.type === 'link' && (
+                <p><a href="#">{line.content}</a></p>
+              )}
+            </div>
+          )
         })}
       </div>
 
