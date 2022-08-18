@@ -48,8 +48,12 @@ export function Post({ author, content, publishedAt }: PostProps) {
     setNewCommentText(event.target.value)
   }
 
-  function deleteComment(comment: string) {
-    console.log(comment)
+  function deleteComment(commentToDelete: string) {
+    const commentsWithoutDeletedOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    })
+
+    setComments(commentsWithoutDeletedOne)
   }
 
   return (
