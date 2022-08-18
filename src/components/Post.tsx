@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBr  from 'date-fns/locale/pt-BR';
@@ -38,18 +38,18 @@ export function Post({ author, content, publishedAt }: PostProps) {
     addSuffix: true
   })
 
-  function handleCreateNewComment(event: React.FormEvent<HTMLFormElement>) {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault()
     setComments([...comments, newCommentText])
     setNewCommentText('')
   }
 
-  function handleNewCommentChange(event: any) {
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     event?.target.setCustomValidity('')
     setNewCommentText(event.target.value)
   }
 
-  function handleNewCommentInvalid(event: any) {
+  function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
     event?.target.setCustomValidity('Campo Obrigátorio!')
   }
 
