@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBr  from 'date-fns/locale/pt-BR';
@@ -38,13 +38,13 @@ export function Post({ author, content, publishedAt }: PostProps) {
     addSuffix: true
   })
 
-  function handleCreateNewComment(event: ChangeEvent<HTMLInputElement>) {
+  function handleCreateNewComment(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setComments([...comments, newCommentText])
     setNewCommentText('')
   }
 
-  function handleNewCommentChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleNewCommentChange(event: any) {
     setNewCommentText(event.target.value)
   }
 
@@ -70,14 +70,14 @@ export function Post({ author, content, publishedAt }: PostProps) {
       </header>
 
       <div className={styles.content}>
-        {content.map((line, index) => {
+        {content.map((line) => {
           return (
-            <div key={index}>
+            <div key={line.content}>
               {line.type === 'paragraph' && (
                 <p>{line.content}</p>
               )}
               {line.type === 'link' && (
-                <p><a href="#">{line.content}</a></p>
+                <p key={line.content}><a href="#">{line.content}</a></p>
               )}
             </div>
           )
@@ -101,8 +101,8 @@ export function Post({ author, content, publishedAt }: PostProps) {
       </form>
 
       <div className={styles.commentList}>
-        {comments.map(comment => (
-          <Comment content={comment} />
+        {comments.map((comment) => (
+          <Comment key={comment} content={comment} />
         ))}
       </div>
 

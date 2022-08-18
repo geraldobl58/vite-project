@@ -46,9 +46,9 @@ export function App() {
         <Sidebar />
 
         <main>
-          {posts.map((item, index) => (
+          {posts.map((item) => (
             <Post 
-              key={index}
+              key={item.id}
               author={item.author}
               content={item.content}
               publishedAt={item.publishedAt} 
